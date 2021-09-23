@@ -2,6 +2,9 @@ package ru.sber.datetime
 
 import java.time.*
 import java.time.format.DateTimeFormatter
+import java.time.temporal.TemporalAdjusters
+import java.util.*
+import kotlin.collections.ArrayList
 
 // 1.
 fun getZonesWithNonDivisibleByHourOffset(): Set<String> {
@@ -17,9 +20,8 @@ fun getZonesWithNonDivisibleByHourOffset(): Set<String> {
 // 2.
 fun getLastInMonthDayWeekList(year: Int): List<String> {
     val result = ArrayList<String>(12)
-    for (i in 1..12) {
-        val date = LocalDate.of(year, i, 1)
-        result.add(date.withDayOfMonth(date.month.length(date.isLeapYear)).dayOfWeek.toString())
+    Month.values().forEach { month ->
+        result.add(LocalDate.of(year, month, 1).with(TemporalAdjusters.lastDayOfMonth()).dayOfWeek.toString())
     }
     return result
 }
@@ -36,7 +38,7 @@ fun getNumberOfFridayThirteensInYear(year: Int): Int {
 
 // 4.
 fun getFormattedDateTime(dateTime: LocalDateTime): String {
-    return DateTimeFormatter.ofPattern("dd MMM YYYY, HH:mm").format(dateTime)
+    return DateTimeFormatter.ofPattern("dd MMM YYYY, HH:mm", Locale.US).format(dateTime)
 }
 
 

@@ -1,13 +1,13 @@
 package ru.sber.generics
 
 // 1.
-fun compare(p1: Pair<Any, Any>, p2: Pair<Any, Any>): Boolean {
+fun <A, B> compare(p1: Pair<A, B>, p2: Pair<A, B>): Boolean {
 
     return (p1.first == p2.first && p1.second == p2.second)
 }
 
 // 2.
-fun countGreaterThan(anArray: Array<Comparable<*>> , elem: Comparable<*>): Int {
+fun <T: Comparable<T>>countGreaterThan(anArray: Array<T>, elem: T): Int {
     var counter = 0
     anArray.forEach { E -> if (compareValues(E, elem) > 0) counter++}
     return counter
@@ -25,7 +25,7 @@ class Sorter<T: Comparable<T>> {
 
 // 4.
 class Stack<T> {
-    val list: MutableList<T> = mutableListOf()
+    private val list: MutableList<T> = mutableListOf()
 
     fun push(element: T) {
         list.add(element)
