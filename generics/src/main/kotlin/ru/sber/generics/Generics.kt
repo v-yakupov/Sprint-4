@@ -9,7 +9,7 @@ fun <A, B> compare(p1: Pair<A, B>, p2: Pair<A, B>): Boolean {
 // 2.
 fun <T: Comparable<T>>countGreaterThan(anArray: Array<T>, elem: T): Int {
     var counter = 0
-    anArray.forEach { E -> if (compareValues(E, elem) > 0) counter++}
+    anArray.forEach { e -> if (compareValues(e, elem) > 0) counter++}
     return counter
 }
 
